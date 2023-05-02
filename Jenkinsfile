@@ -18,8 +18,15 @@ pipeline {
                 script{
                     sh 'docker build -t jmateo/discover .'
                 }
+            }  
+        }
+
+        stage('Deploy') {
+            steps {
+                sh 'docker stop discover'
+                sh 'docker rm discover'
+                sh 'docker run -d -p 8761:8761 --name discover jmateo/discover'
             }
-            
         }
     }
 }
