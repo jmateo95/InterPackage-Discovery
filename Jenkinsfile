@@ -20,11 +20,11 @@ pipeline {
                 }
             }  
         }
-
+        
         stage('Deploy') {
             steps {
-                sh 'docker stop discover'
-                sh 'docker rm discover'
+                sh 'docker stop discover || true'
+                sh 'docker rm discover || true'
                 sh 'docker run -d -p 8761:8761 --name discover jmateo/discover'
             }
         }
