@@ -7,13 +7,13 @@ pipeline {
     }
 
     stages {
-        stage('Build jar') {
+        stage('Crear jar') {
             steps {
                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/jmateo95/InterPackage-Discovery']])
                 sh 'mvn clean install -DskipTests'
             }
         }
-        stage ('Build docker image'){
+        stage ('Crear imagen de docker'){
             steps{
                 script{
                     sh 'docker build -t jmateo/discover .'
@@ -21,7 +21,7 @@ pipeline {
             }  
         }
         
-        stage('Deploy') {
+        stage('Desplegar imagen de docker') {
             steps {
                 sh 'docker stop discover || true'
                 sh 'docker rm discover || true'
