@@ -10,23 +10,23 @@ pipeline {
         stage('Crear jar') {
             steps {
                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/jmateo95/InterPackage-Discovery']])
-                sh 'mvn clean install -DskipTests'
+                sh 'cd /home/Interpackage/InterPackage-Discovery-Server && git pull origin main && mvn clean install -DskipTests'
             }
         }
-        stage ('Crear imagen de docker'){
+
+        stage('Detener el contenedor de docker') {
+            steps {
+                sh 'docker stop docker-interpackage-service-discovery'
+                sh 'docker rm docker-interpackage-service-discovery'
+            }
+        }
+
+        stage ('Desplegar imagen de docker'){
             steps{
                 script{
-                    sh 'docker build -t jmateo/discover .'
+                    sh 'cd /home/Interpackage/docker && docker-compose up -d --build interpackage-service-discovery'
                 }
             }  
-        }
-        
-        stage('Desplegar imagen de docker') {
-            steps {
-                sh 'docker stop discover || true'
-                sh 'docker rm discover || true'
-                sh 'docker run -d -p 8761:8761 --name discover jmateo/discover'
-            }
         }
     }
 }
