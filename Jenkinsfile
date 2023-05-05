@@ -16,8 +16,8 @@ pipeline {
 
         stage('Detener El Servicio Docker') {
             steps {
-                sh 'ssh root@167.172.108.85 "docker stop docker-interpackage-service-discovery"'
-                sh 'ssh root@167.172.108.85 "docker rm docker-interpackage-service-discovery"'
+                sh 'ssh root@167.172.108.85 "docker stop docker-interpackage-service-discovery-1"'
+                sh 'ssh root@167.172.108.85 "docker rm docker-interpackage-service-discovery-1"'
             }
         }
 
