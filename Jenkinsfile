@@ -7,7 +7,7 @@ pipeline {
     }
 
     stages {
-        stage('Test Y Creacion De Jar') {
+        stage('Test Y Creacion De JAR') {
             steps {
                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/jmateo95/InterPackage-Discovery']])
                 sh 'ssh root@137.184.209.89 "cd /home/Interpackage/InterPackage-Discovery-Server && git pull origin main && mvn clean install -DskipTests"'
