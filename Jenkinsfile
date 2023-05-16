@@ -24,7 +24,7 @@ pipeline {
         stage ('Desplegar Imgen de Docker'){
             steps{
                 script{
-                    sh 'ssh root@137.184.209.89 "cd /home/Interpackage/docker && docker-compose up -d --build interpackage-service-discovery"'
+                    sh 'ssh root@137.184.209.89 "cd /home/Interpackage/InterPackage-Docker && docker-compose up -d --build interpackage-service-discovery"'
                 }
             }  
         }
